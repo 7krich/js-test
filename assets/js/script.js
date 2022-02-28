@@ -1,3 +1,4 @@
+// element selection
 const start = document.getElementById("start");
 const quiz = document.getElementById("quiz");
 const question = document.getElementById("question");
@@ -42,35 +43,41 @@ start.addEventListener("click", startQuiz);
 
 function startQuiz() {
   start.style.display = "none";
-  coutnerRender();
-  TIMER = setInterval(conterRender,1000);
-  progressRender();
-  questionRender();
-  quiz.style.display = "block"
+  renderQuestion();
+  quiz.style.display = "block";
+  countdown();
+  score();
 }
 
-
+function score() {
+  scoreContainer.style.display = "block";
+  let scorePerCent = Math.round(100 * score/questions.length);
+  scoreContainer.innerHTML = scorePerCent + "%";
+}
 
 // display questions
 
-let lastQuestionIndex = questions.length-1;
-let runningQuestionIndex = 0;
+let lastQuestion = questions.length-1;
+let runningQuestion = 0;
 
 function renderQuestion() {
-  let q = questions[runningQuestionIndex];
+  let q = questions[runningQuestion];
   question.innerHTML = "<p>" + q.question + "</p>";
   choiceA.innerHTML = q.choiceA;
   choiceB.innerHTML = q.choiceB;
   choiceC.innerHTML = q.choiceC;
+  choiceD.innerHTML = q.choiceD;
 };
 
-runningQuestionIndex = 0;
-renderQuestion();
+start.style.display = "block";
+quiz.style.display = "none;"
+
+runningQuestion = 0;
 
 // check answer function
 function checkAnswer (answer) {
   //check if the correct answer was chosen
-  if (question[runningQuestionIndex].correct == answer) {
+  if (questions[runningQuestion].correct == answer) {
     // if true add to the score
     score++;
   } else {
@@ -79,17 +86,22 @@ function checkAnswer (answer) {
 
   }
   // stop at the last question
-  if (runningQuestionIndex < lastQuestionIndex) {
+  if (runningQuestion < lastQuestionIndex) {
     // display new questions
     count = 0;
     runningQuestionIndex++
     quesitonRender();
   } else {
     // clear timer interval and show the score when done 
-    clearInterval(TIMER);
+    clearInterval();
     ScoreRender();
   }
 }
+
+//render timer
+let count = 100
+const questionTime = 100;
+
 
 // Timer that counts down from 100
 function countdown() {
@@ -114,4 +126,4 @@ function countdown() {
   }, 1000);
 }
 
-countdown();
+
