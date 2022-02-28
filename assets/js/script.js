@@ -1,66 +1,95 @@
-// create html elements
-var body = document.body;
-var h1El = document.createElement("h1");
-var timeEl = document.createElement("div");
-var scoreEl = document.createElement("div");
-var infoEl = document.createElement("section");
-var questionEl = document.createElement("div");
-var listEl = document.createElement("ol");
-var answersEl = document.createElement("li");
-var answersEl = document.createElement("li");
-var answersEl = document.createElement("li");
-var answersEl = document.createElement("li");
-var resultEl = document.createElement("div");
+const start = document.getElementById("start");
+const quiz = document.getElementById("quiz");
+const question = document.getElementById("question");
+const choiceA = document.getElementById("A");
+const choiceB = document.getElementById("B");
+const choiceC = document.getElementById("C");
+const choiceD = document.getElementById("D");
+const timerEl = document.getElementById("countdown");
+const mainEl = document.getElementById("main");
+const progress = document.getElementById("progress");
+const scoreCounter = document.getElementById("scoreContainer");
 
-// add text to html elements
-h1El.textContent = "Welcome to the Javascript assessment";
-scoreEl.textContent = "View high Scores";
-timeEl = "Time: "
-questionEl = "What Javascript feature is helpful for examining a data set multiple times?"
+let questions = [
+  {
+    question: "What does DOM stand for?",
+    choiceA: "Document Object Maker",
+    choiceB: "Document Object Model",
+    choiceC: "Data Object Marker",
+    choiceD: "Data Output Module",
+    correct: "B"
+  },
+  {
+    question: "What javascript item makes it easy to evaluate data multiple times?",
+    choiceA: "If, Else statements",
+    choiceB: "DOM methods",
+    choiceC: "For Loops",
+    choiceD: "While Loops",
+    correct: "C"
+  },
+  {
+    question: "JSON is an important feature related to what topic",
+    choiceA: "Making websites interactive",
+    choiceB: "Creating new HTML elements with Javascript",
+    choiceC: "Event handling",
+    choiceD: "Local Storage",
+    correct: "D"
+  },
+]
 
+// start quiz
+start.addEventListener("click", startQuiz);
 
-// append (add) items to the page
-body.appendChild(h1El);
-body.append(scoreEl);
-body.append(timeEl);
-body.append(questionEl);
-body.append(timerEl);
-
-// set attributes
-
-h1El.setAttribute("style", "margin:auto; width:50%; text-align:center;");
-
-
-// var questions = [
-//     {
-//         prompt: "What Javascript feature is helpful for examining a data set multiple times?\n(A) If else statement\n(B) For Loop\n(C) While Loop\n(D) None of the above",
-//         answer: "A"
-//     },
-//     {
-//         prompt: "What does DOM stand for?\n(A) Document Object Maker\n(B) Developer Oganization Marker\n(C) Document Object Model\n(D) Document Organization Model",
-//         answer: "C"
-//     },
-//     {
-//         prompt: "What is a Javascript object?\n(A) A data set with properties\n(B) Any piece of data\n(C) An attribute\n(D) None of the above",
-//         answer: "A"
-//     },
-// ];
-// var score = 0;
-
-// for (var i=0; i<questions.length; i++) {
-//     var response = document.write(questions[i].prompt);
-//     if(response == questions[i].answer) {
-//         score++;
-//     }
-// };
+function startQuiz() {
+  start.style.display = "none";
+  coutnerRender();
+  TIMER = setInterval(conterRender,1000);
+  progressRender();
+  questionRender();
+  quiz.style.display = "block"
+}
 
 
-// document.write("You got " + score + " out of 3.");
 
-// timer
+// display questions
 
-var timerEl = document.getElementById('countdown');
-var mainEl = document.getElementById('main');
+let lastQuestionIndex = questions.length-1;
+let runningQuestionIndex = 0;
+
+function renderQuestion() {
+  let q = questions[runningQuestionIndex];
+  question.innerHTML = "<p>" + q.question + "</p>";
+  choiceA.innerHTML = q.choiceA;
+  choiceB.innerHTML = q.choiceB;
+  choiceC.innerHTML = q.choiceC;
+};
+
+runningQuestionIndex = 0;
+renderQuestion();
+
+// check answer function
+function checkAnswer (answer) {
+  //check if the correct answer was chosen
+  if (question[runningQuestionIndex].correct == answer) {
+    // if true add to the score
+    score++;
+  } else {
+    answerIsWrong();
+    //reduce time here
+
+  }
+  // stop at the last question
+  if (runningQuestionIndex < lastQuestionIndex) {
+    // display new questions
+    count = 0;
+    runningQuestionIndex++
+    quesitonRender();
+  } else {
+    // clear timer interval and show the score when done 
+    clearInterval(TIMER);
+    ScoreRender();
+  }
+}
 
 // Timer that counts down from 100
 function countdown() {
