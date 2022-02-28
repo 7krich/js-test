@@ -6,10 +6,9 @@ const choiceA = document.getElementById("A");
 const choiceB = document.getElementById("B");
 const choiceC = document.getElementById("C");
 const choiceD = document.getElementById("D");
-const timerEl = document.getElementById("countdown");
-const mainEl = document.getElementById("main");
+const counter = document.getElementById("counter");
+const scoreDiv = document.getElementById("storeContainer")
 const progress = document.getElementById("progress");
-const scoreCounter = document.getElementById("scoreContainer");
 
 let questions = [
   {
@@ -38,28 +37,15 @@ let questions = [
   },
 ]
 
-// start quiz
-start.addEventListener("click", startQuiz);
-
-function startQuiz() {
-  start.style.display = "none";
-  renderQuestion();
-  quiz.style.display = "block";
-  countdown();
-  score();
-}
-
-function score() {
-  scoreContainer.style.display = "block";
-  let scorePerCent = Math.round(100 * score/questions.length);
-  scoreContainer.innerHTML = scorePerCent + "%";
-}
-
-// display questions
-
+// variables
 let lastQuestion = questions.length-1;
 let runningQuestion = 0;
+let score = 0;
+let count = 0;
+let TIMER;
+const questionTime = 100;
 
+// display questions
 function renderQuestion() {
   let q = questions[runningQuestion];
   question.innerHTML = "<p>" + q.question + "</p>";
@@ -69,61 +55,111 @@ function renderQuestion() {
   choiceD.innerHTML = q.choiceD;
 };
 
+// start quiz
+start.addEventListener("click", startQuiz);
+
+function startQuiz() {
+  start.style.display = "none";
+  renderQuestion();
+  quiz.style.display = "block";
+  renderProgress();
+  renderCounter();
+  TIMER = setInterval(renderCounter,1000);
+};
+
+// progress
+function renderProgress() {
+  for(let qIndex = 0; qIndex <= lastQuestion; qIndex++) {
+    progress.innerHTML += "<div class='prog' id="+ qIndex +"></div>";
+  }
+};
+
+// countdown 
+function renderCounter() {
+  if(count <= questionTime) {
+    counter.innerHTML = count;
+    count++;
+  } else {
+    count = 0;
+    answerIsWrong();
+    if(runningQuestion < lastQuestion){
+      runningQuestion++;
+      renderQuestion();
+    } else {
+      clearInterval(TIMER);
+      scoreRender();
+    }
+  }
+}
+
 start.style.display = "block";
 quiz.style.display = "none;"
-
-runningQuestion = 0;
 
 // check answer function
 function checkAnswer (answer) {
   //check if the correct answer was chosen
-  if (questions[runningQuestion].correct == answer) {
-    // if true add to the score
+  if (answer == questions[runningQuestion].correct) {
+    // if correct add to the score
     score++;
   } else {
+    // if wrong
     answerIsWrong();
     //reduce time here
 
   }
-  // stop at the last question
-  if (runningQuestion < lastQuestionIndex) {
-    // display new questions
-    count = 0;
-    runningQuestionIndex++
-    quesitonRender();
+  count > 0;
+  if(runningQuestion < lastQuestion) {
+    runningQuestion++;
+    renderQuestion();
   } else {
-    // clear timer interval and show the score when done 
-    clearInterval();
-    ScoreRender();
+    // end quiz
+    clearInterval(TIMER);
+    scoreRender();
   }
+};
+
+//answer is correct
+function answerIsCorrect() {
+  document.write("correct!");
+};
+
+//answer is wrong
+function answerIsWrong() {
+  document.write('Incorrect!')
 }
 
-//render timer
-let count = 100
-const questionTime = 100;
+// score
+function scoreRender() {
+  scoreDiv.style.display = "block";
 
-
-// Timer that counts down from 100
-function countdown() {
-  var timeLeft = 100;
-
-  // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  var timeInterval = setInterval(function () {
-    // As long as the `timeLeft` is greater than 1
-    if (timeLeft > 1) {
-        // Set the `textContent` of `timerEl` to show the remaining seconds
-        timerEl.textContent = timeLeft + ' seconds remaining';
-        // Decrement `timeLeft` by 1
-        timeLeft--;
-    } else if (timeLeft === 1) {
-        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-        timerEl.textContent = timeLeft + ' second remaining';
-        timeLeft--;
-    } else {
-        // when time runs out notfiy the user
-        timerEl.textContent = "You are out of time!";
-    }
-  }, 1000);
+  // give user their score
+  const scorePercent = Math.round(100 * score/questions.length);
+  scoreDiv.innerHTML += "<p>" + scorePercent + "%</p>";
 }
+
+
+
+// // Timer that counts down from 100
+// function countdown() {
+//   var timeLeft = 100;
+
+//   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+//   var timeInterval = setInterval(function () {
+//     // As long as the `timeLeft` is greater than 1
+//     if (timeLeft > 1) {
+//         // Set the `textContent` of `timerEl` to show the remaining seconds
+//         timerEl.textContent = timeLeft + ' seconds remaining';
+//         // Decrement `timeLeft` by 1
+//         timeLeft--;
+//     } else if (timeLeft === 1) {
+//         // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+//         timerEl.textContent = timeLeft + ' second remaining';
+//         timeLeft--;
+//     } else {
+//         // when time runs out notfiy the user
+//         timerEl.textContent = "You are out of time!";
+//     }
+//   }, 1000);
+// }
 
 
