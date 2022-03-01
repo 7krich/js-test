@@ -37,6 +37,10 @@ button:not(:hover) {
     transition-duration: 2s;
 }
 
+button:active {
+    background-color: black;
+}
+
 #question {
     font-weight: bold;
     font-size: 35px;
