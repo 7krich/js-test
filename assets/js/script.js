@@ -38,12 +38,12 @@ let questions = [
     correct: "D"
   },
   {
-  question: "What DOM method allows you to return HTML content of an element",
-  choiceA: "innerHTML",
-  choiceB: "getElementById",
-  choiceC: "attribute",
-  choiceD: "setAttribute",
-  correct: "A"
+    question: "What DOM method allows you to return HTML content of an element",
+    choiceA: "innerHTML",
+    choiceB: "getElementById",
+    choiceC: "attribute",
+    choiceD: "setAttribute",
+    correct: "A"
   },
 ]
 
@@ -55,10 +55,6 @@ let count = 100;
 let TIMER;
 const questionTime = 100;
 
-//
-
-//
-//
 // functions for game to work
 // display questions
 function renderQuestion() {
@@ -89,6 +85,13 @@ function renderProgress() {
   }
 };
 
+// end quiz
+function endQuiz() {
+  if (TIMER <= 0 || runningQuestion > lastQuestion) {
+    document.write = "You have reached the end of the quiz!"
+  }
+}
+
 // countdown 
 function renderCounter() {
   if(count <= questionTime) {
@@ -115,7 +118,7 @@ function checkAnswer (answer) {
     score++;
   } else {
     // if wrong
-    answerIsWrong();
+    count = count - 5;
   }
   count > 0;
   if(runningQuestion < lastQuestion) {
@@ -124,14 +127,15 @@ function checkAnswer (answer) {
   } else {
     // end quiz
     clearInterval(TIMER);
+    question.style.display= "none";
+    choiceA.style.display= "none";
+    choiceB.style.display= "none";
+    choiceC.style.display= "none";
+    choiceD.style.display= "none";
     scoreRender();
     formRender();
+    endQuiz;
   }
-};
-
-//answer is wrong
-function answerIsWrong() {
-  count = count - 5;
 };
 
 // score
