@@ -147,6 +147,19 @@ function scoreRender() {
   // give user their score
   const scorePerCent = Math.round(100 * score/questions.length);
   scoreDiv.innerHTML += "<p>Score: " + scorePerCent + "%</p>";
+
+    // add score to local storage
+    // create array for score and initials
+    submitButton.addEventListener("click", function(event) {
+      event.preventDefault();
+    
+      user = {
+        intiails: initials.value,
+        scorePerCent
+      }
+
+    localStorage.setItem(scorePerCent + initials, JSON.stringify(user));
+  })
 };
 
 // intials
@@ -154,16 +167,4 @@ function formRender() {
   initialsDiv.style.display = "block";
 }
 
-// add score to local storage
-// create array for score and initials
-submitButton.addEventListener("click", function(event) {
-  event.preventDefault();
 
-  var user = {
-    totalScore: scorePerCent.value,
-    initials: userInitials.value,
-  };
-
-  localStorage.setItem("user", JSON.stringify(user));
-
-});
