@@ -7,7 +7,7 @@ const choiceB = document.getElementById("B");
 const choiceC = document.getElementById("C");
 const choiceD = document.getElementById("D");
 const counter = document.getElementById("counter");
-const scoreDiv = document.getElementById("storeContainer")
+const scoreDiv = document.getElementById("scoreContainer")
 const progress = document.getElementById("progress");
 
 let questions = [
@@ -116,40 +116,14 @@ function checkAnswer (answer) {
 //answer is wrong
 function answerIsWrong() {
   count = count - 5;
-}
+};
 
 // score
 function scoreRender() {
   scoreDiv.style.display = "block";
 
   // give user their score
-  const scorePercent = Math.round(100 * score/questions.length);
-  scoreDiv.innerHTML += "<p>" + scorePercent + "%</p>";
-}
-
-
-
-// // Timer that counts down from 100
-// function countdown() {
-//   var timeLeft = 100;
-
-//   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-//   var timeInterval = setInterval(function () {
-//     // As long as the `timeLeft` is greater than 1
-//     if (timeLeft > 1) {
-//         // Set the `textContent` of `timerEl` to show the remaining seconds
-//         timerEl.textContent = timeLeft + ' seconds remaining';
-//         // Decrement `timeLeft` by 1
-//         timeLeft--;
-//     } else if (timeLeft === 1) {
-//         // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-//         timerEl.textContent = timeLeft + ' second remaining';
-//         timeLeft--;
-//     } else {
-//         // when time runs out notfiy the user
-//         timerEl.textContent = "You are out of time!";
-//     }
-//   }, 1000);
-// }
-
+  const scorePerCent = Math.round(100 * score/questions.length);
+  scoreDiv.innerHTML += "<p>Score: " + scorePerCent + "%</p>";
+};
 
