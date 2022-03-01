@@ -16,35 +16,43 @@ const userInitials = document.getElementById("initials")
 // questions array
 let questions = [
   {
-    question: "What does DOM stand for?",
-    choiceA: "Document Object Maker",
-    choiceB: "Document Object Model",
-    choiceC: "Data Object Marker",
-    choiceD: "Data Output Module",
+    question: "1. What does DOM stand for?",
+    choiceA: "A. Document Object Maker",
+    choiceB: "B. Document Object Model",
+    choiceC: "C. Data Object Marker",
+    choiceD: "D. Data Output Module",
     correct: "B"
   },
   {
-    question: "What javascript item makes it easy to evaluate data multiple times?",
-    choiceA: "If, Else statements",
-    choiceB: "DOM methods",
-    choiceC: "For Loops",
-    choiceD: "While Loops",
+    question: "2. What javascript item makes it easy to evaluate data multiple times?",
+    choiceA: "A. If, Else statements",
+    choiceB: "B. DOM methods",
+    choiceC: "C. For Loops",
+    choiceD: "D. While Loops",
     correct: "C"
   },
   {
-    question: "JSON is an important feature related to what topic?",
-    choiceA: "Making websites interactive",
-    choiceB: "Creating new HTML elements with Javascript",
-    choiceC: "Event handling",
-    choiceD: "Local Storage",
+    question: "3. JSON is an important feature related to what topic?",
+    choiceA: "A. Making websites interactive",
+    choiceB: "B. Creating new HTML elements with Javascript",
+    choiceC: "C. Event handling",
+    choiceD: "D. Local Storage",
     correct: "D"
   },
   {
-    question: "What DOM method allows you to return HTML content of an element",
-    choiceA: "innerHTML",
-    choiceB: "getElementById",
-    choiceC: "attribute",
-    choiceD: "setAttribute",
+    question: "4. What DOM method allows you to return HTML content of an element?",
+    choiceA: "A. innerHTML",
+    choiceB: "B. getElementById",
+    choiceC: "C. attribute",
+    choiceD: "D. setAttribute",
+    correct: "A"
+  },
+  {
+    question: "5. How do you convert data into a string so it can be saved locally?",
+    choiceA: "A. stringify",
+    choiceB: "B. parse",
+    choiceC: "C. getItem",
+    choiceD: "D. setItem",
     correct: "A"
   },
 ]
@@ -53,9 +61,9 @@ let questions = [
 let lastQuestion = questions.length-1;
 let runningQuestion = 0;
 let score = 0;
-let count = 100;
+let count = 45;
 let TIMER;
-const questionTime = 100;
+const questionTime = 45;
 
 // functions for game to work
 // display questions
@@ -109,6 +117,16 @@ function renderCounter() {
       clearInterval(TIMER);
       scoreRender();
     }
+  } if (count === -1) {
+    clearInterval(TIMER);
+    question.style.display= "none";
+    choiceA.style.display= "none";
+    choiceB.style.display= "none";
+    choiceC.style.display= "none";
+    choiceD.style.display= "none";
+    scoreRender();
+    formRender();
+    endQuiz;
   }
 }
 
