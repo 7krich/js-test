@@ -32,12 +32,12 @@ let questions = [
     correct: "C"
   },
   {
-    question: "3. JSON is an important feature related to what topic?",
+    question: "3. Javascript is important for what reason",
     choiceA: "A. Making websites interactive",
-    choiceB: "B. Creating new HTML elements with Javascript",
-    choiceC: "C. Event handling",
-    choiceD: "D. Local Storage",
-    correct: "D"
+    choiceB: "B. Styling webpages",
+    choiceC: "C. Local Storage",
+    choiceD: "D. None of the above",
+    correct: "A"
   },
   {
     question: "4. What DOM method allows you to return HTML content of an element?",
