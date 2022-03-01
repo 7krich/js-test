@@ -9,7 +9,9 @@ const choiceD = document.getElementById("D");
 const counter = document.getElementById("counter");
 const scoreDiv = document.getElementById("scoreContainer")
 const progress = document.getElementById("progress");
+const initialsDiv = document.getElementById("initialsForm");
 
+// questions array
 let questions = [
   {
     question: "What does DOM stand for?",
@@ -28,12 +30,20 @@ let questions = [
     correct: "C"
   },
   {
-    question: "JSON is an important feature related to what topic",
+    question: "JSON is an important feature related to what topic?",
     choiceA: "Making websites interactive",
     choiceB: "Creating new HTML elements with Javascript",
     choiceC: "Event handling",
     choiceD: "Local Storage",
     correct: "D"
+  },
+  {
+  question: "What DOM method allows you to return HTML content of an element",
+  choiceA: "innerHTML",
+  choiceB: "getElementById",
+  choiceC: "attribute",
+  choiceD: "setAttribute",
+  correct: "A"
   },
 ]
 
@@ -45,6 +55,11 @@ let count = 100;
 let TIMER;
 const questionTime = 100;
 
+//
+
+//
+//
+// functions for game to work
 // display questions
 function renderQuestion() {
   let q = questions[runningQuestion];
@@ -110,6 +125,7 @@ function checkAnswer (answer) {
     // end quiz
     clearInterval(TIMER);
     scoreRender();
+    formRender();
   }
 };
 
@@ -127,3 +143,7 @@ function scoreRender() {
   scoreDiv.innerHTML += "<p>Score: " + scorePerCent + "%</p>";
 };
 
+// intials
+function formRender() {
+  initialsDiv.style.display = "block";
+}
