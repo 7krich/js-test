@@ -10,6 +10,8 @@ const counter = document.getElementById("counter");
 const scoreDiv = document.getElementById("scoreContainer")
 const progress = document.getElementById("progress");
 const initialsDiv = document.getElementById("initialsForm");
+const submitButton = document.getElementById("submit");
+const userInitials = document.getElementById("initials")
 
 // questions array
 let questions = [
@@ -151,3 +153,17 @@ function scoreRender() {
 function formRender() {
   initialsDiv.style.display = "block";
 }
+
+// add score to local storage
+// create array for score and initials
+submitButton.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  var user = {
+    totalScore: scorePerCent.value,
+    initials: userInitials.value,
+  };
+
+  localStorage.setItem("user", JSON.stringify(user));
+
+});
