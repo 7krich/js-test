@@ -41,7 +41,7 @@ let questions = [
 let lastQuestion = questions.length-1;
 let runningQuestion = 0;
 let score = 0;
-let count = 0;
+let count = 100;
 let TIMER;
 const questionTime = 100;
 
@@ -78,7 +78,7 @@ function renderProgress() {
 function renderCounter() {
   if(count <= questionTime) {
     counter.innerHTML = count;
-    count++;
+    count--;
   } else {
     count = 0;
     answerIsWrong();
@@ -92,9 +92,6 @@ function renderCounter() {
   }
 }
 
-start.style.display = "block";
-quiz.style.display = "none;"
-
 // check answer function
 function checkAnswer (answer) {
   //check if the correct answer was chosen
@@ -104,8 +101,6 @@ function checkAnswer (answer) {
   } else {
     // if wrong
     answerIsWrong();
-    //reduce time here
-
   }
   count > 0;
   if(runningQuestion < lastQuestion) {
@@ -118,14 +113,9 @@ function checkAnswer (answer) {
   }
 };
 
-//answer is correct
-function answerIsCorrect() {
-  document.write("correct!");
-};
-
 //answer is wrong
 function answerIsWrong() {
-  document.write('Incorrect!')
+  count = count - 5;
 }
 
 // score

@@ -9,35 +9,22 @@
 </head>
 <body>
     <div id="container">
-
         <div id="start">Start Quiz!</div>
-
             <div class="timer">
                 <h2 id="counter"></h2>
             </div>
-
             <div id="quiz" style="display: none">
-
-                <div id="question">
-                    <p>Question</p>
-                </div>
-
+                <div id="question"></div>
                 <div id="choices">
                     <div class="choice" id="A" onclick="checkAnswer('A')">A</div>
                     <div class="choice" id="B" onclick="checkAnswer('B')">B</div>
                     <div class="choice" id="C" onclick="checkAnswer('C')">C</div>
                     <div class="choice" id="D" onclick="checkAnswer('D')">D</div>
                 </div>
-
-                <div id="progress"><div class="prog"></div>
-
+                <div id="progress"></div>
             </div>
-
-            <div id="scoreContainer" style="display: none">
-        
+            <div id="scoreContainer" style="display: none"></div>
         </div>
-
-        
     </div>
 
     <script src="./assets/js/script.js"></script>
